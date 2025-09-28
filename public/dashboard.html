@@ -43,86 +43,17 @@
                 <h1 id="welcomeMessage">Welcome to Dashboard!</h1>
                 <p>Manage your account and view your activity</p>
             </div>
-            <div class="user-actions">
-                <button onclick="refreshData()" class="btn btn-outline">🔄 Refresh</button>
-                <a href="/" class="btn btn-primary">🏠 Home</a>
-                <button onclick="logout()" class="btn btn-danger">🚪 Logout</button>
-            </div>
+            
         </div>
 
         <div id="alert" class="alert"></div>
         <div id="loading" class="loading"></div>
 
         <!-- Original Dashboard Grid -->
-        <div class="dashboard-grid">
-            <!-- User Information Card -->
-            <div class="card user-info">
-                <h3><span class="card-icon">👤</span> User Profile</h3>
-                <div class="info-item">
-                    <span class="info-label">Name:</span>
-                    <span id="userName" class="info-value">Loading...</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Email:</span>
-                    <span id="userEmail" class="info-value">Loading...</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Role:</span>
-                    <span id="userRole" class="info-value">Loading...</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Member Since:</span>
-                    <span id="userJoined" class="info-value">Loading...</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">User ID:</span>
-                    <span id="userId" class="info-value">Loading...</span>
-                </div>
-            </div>
-
+        
+           
             <!-- Statistics Card -->
-            <div class="card">
-                <h3><span class="card-icon">📊</span> Account Statistics</h3>
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <span class="stat-number" id="loginCount">0</span>
-                        <span class="stat-label">Total Logins</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number" id="daysSinceJoined">0</span>
-                        <span class="stat-label">Days Member</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number" id="lastLoginDays">0</span>
-                        <span class="stat-label">Days Since Login</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number" id="accountStatus">✅</span>
-                        <span class="stat-label">Account Status</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Quick Actions Card -->
-            <div class="card">
-                <h3><span class="card-icon">⚡</span> Quick Actions</h3>
-                <div style="display: grid; gap: 1rem;">
-                    <button onclick="testApiConnection()" class="btn btn-outline" style="width: 100%;">
-                        🔗 Test API Connection
-                    </button>
-                    <button onclick="downloadUserData()" class="btn btn-outline" style="width: 100%;">
-                        📥 Download User Data
-                    </button>
-                    <button onclick="clearLocalData()" class="btn btn-outline" style="width: 100%;">
-                        🗑️ Clear Local Storage
-                    </button>
-                    <button onclick="showTokenInfo()" class="btn btn-outline" style="width: 100%;">
-                        🎫 View Token Info
-                    </button>
-                </div>
-            </div>
-        </div>
-
+          
         <!-- New Retail Dashboard Section -->
         <div class="page-title">
             <h2>Dashboard</h2>
