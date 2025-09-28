@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 50px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 2rem; border-radius: 10px; }
+        .btn { padding: 10px 20px; margin: 5px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dashboard</h1>
+        <div id="userInfo">
+            <h3>Welcome!</h3>
+            <p>Loading user information...</p>
+        </div>
+        <button onclick="logout()" class="btn">Logout</button>
+        <a href="/" class="btn">Home</a>
+    </div>
+    <script>
+        // Check if user is logged in
+        const token = localStorage.getItem('authToken');
+        if (!token) {
+            window.location.href = '/login';
+        }
+        
+        // Load user data
+        fetch('/api/auth/user', {
+            headers: { 'Authorization': 'Bearer ' + token }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById('userInfo').innerHTML = 
+                    '<h3>Welcome, ' + data.user.name + '!</h3>' +
+                    '<p>Email: ' + data.user.email + '</p>' +
+                    '<p>Member since: ' + new Date(data.user.createdAt).toLocaleDateString() + '</p>';
+            } else {
+                alert('Error loading user data');
+                window.location.href = '/login';
+            }
+        })
+        .catch(error => {
+            alert('Error: ' + error.message);
+            window.location.href = '/login';
+        });
+        
+        function logout() {
+            localStorage.removeItem('authToken');
+            alert('Logged out successfully!');
+            window.location.href = '/';
+        }
+    </script>
+</body>
+</html>
