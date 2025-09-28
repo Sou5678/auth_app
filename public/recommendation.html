@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="shared-styles.css">
+  <title>Editable Recommendations Table</title>
+  <!-- <style>
+    body { font-family: Arial, sans-serif; background: #fafbfc; margin: 0; }
+    
+    .nav-button {
+      display: inline-flex;
+      align-items: center;
+      background: #2563eb;
+      color: white;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 16px;
+      transition: all 0.2s ease;
+      margin-bottom: 16px;
+      cursor: pointer;
+      border: none;
+    }
+
+    .nav-button:hover {
+      background: #1d4ed8;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    }
+
+    .nav-button:active {
+      transform: translateY(0);
+    }
+
+    .up-arrow {
+      border: solid white;
+      border-width: 0 3px 3px 0;
+      display: inline-block;
+      padding: 6px;
+      margin-right: 12px;
+      transform: rotate(135deg);
+      -webkit-transform: rotate(135deg);
+      transition: transform 0.2s ease;
+    }
+
+    .nav-button:hover .up-arrow {
+      transform: rotate(135deg) scale(1.1);
+    }
+    
+    .container { max-width: 900px; margin: auto; padding: 24px; }
+    .flex { display: flex; align-items: center; }
+    .gap-3 { gap: 12px; }
+    .gap-2 { gap: 8px; }
+    .space-y-2 > * + * { margin-top: 8px; }
+    .space-y-4 > * + * { margin-top: 16px; }
+    .btn {
+      padding: 7px 12px;
+      border: 1px solid #e3e3e3;
+      background: #f1f1f1;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s;
+      font-size: 15px;
+    }
+    .btn.primary { background: #2563eb; color: #fff; border-color: #1557c4; }
+    .btn[disabled] { opacity: 0.6; cursor: not-allowed; }
+    .card { background: #fff; border-radius: 8px; margin-bottom: 24px; box-shadow: 0 1px 4px #0001; padding: 20px; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 14px; font-weight: 500; }
+    .badge.high { background: #fee2e2; color: #b91c1c; }
+    .badge.medium { background: #fef9c3; color: #92400e; }
+    .badge.low { background: #d1fae5; color: #065f46; }
+    .table { width: 100%; border-collapse: collapse; }
+    .table th, .table td { padding: 8px 12px; border: 1px solid #ececec; }
+    .actions { display: flex; gap:6px; }
+    .img-bundle { width: 100%; height: 120px; object-fit: cover; border-radius: 10px 10px 0 0; }
+    .grid { display: grid; gap: 18px; }
+    .grid-cols-2 { grid-template-columns: 1fr 1fr; }
+    .mt-16 { margin-top: 16px }
+    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 18px; }
+    .statcontent { font-size: 24px; margin-top: 7px; margin-bottom: 4px; font-weight: bold;}
+    .scroll-area { max-height: 370px; overflow-y: auto; }
+    @media (max-width:700px) {
+      .container { padding: 6px; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .grid-cols-2 { grid-template-columns: 1fr; }
+    }
+    input[type="number"] { font-size: 14px; border: 1px solid #bdbdbd; border-radius: 5px; padding: 4px; }
+  </style> -->
+</head>
+<body>
+<div class="container">
+  <!-- Navigation Button -->
+  <a href="dashboard.html" class="nav-button">
+    <span class="up-arrow"></span>
+    Back to Dashboard
+  </a>
+  <!-- Header -->
+  <div class="space-y-2">
+    <div class="flex gap-3">
+      <h1 style="font-size:1.85rem; font-weight:600;">Recommendations</h1>
+    </div>
+    <p style="color:#666; margin-left:0;">AI-powered suggestions to optimize your inventory and boost sales</p>
+  </div>
+  <!-- Stats -->
+  <div class="stats-grid">
+    <div class="card" onclick="showStatInfo('savings')">
+      <div style="color:#256d2a;">Potential Savings</div>
+      <div class="statcontent" style="color:#16a34a;">₹54,000</div>
+      <div style="color:#888;font-size:13px">From smart reordering</div>
+    </div>
+    <div class="card" onclick="showStatInfo('stockout')">
+      <div style="color:#bd5407;">Stockout Prevention</div>
+      <div class="statcontent" style="color:#ea580c;">8 items</div>
+      <div style="color:#888;font-size:13px">At risk in next 7 days</div>
+    </div>
+    <div class="card" onclick="showStatInfo('revenue')">
+      <div style="color:#2235b6;">Revenue Opportunity</div>
+      <div class="statcontent" style="color:#2563eb;">₹53,500</div>
+      <div style="color:#888;font-size:13px">From cross-selling</div>
+    </div>
+  </div>
+  <!-- Reorder Table -->
+  <div class="card">
+    <div class="flex" style="justify-content: space-between;">
+      <div>
+        <div style="font-size:1.1rem; font-weight: 600;">Reorder Suggestions</div>
+        <div style="color:#888;">Products that need replenishment based on demand forecasts</div>
+      </div>
+      <button class="btn primary" onclick="createBulkPO()" id="bulkPOBtn">Create Bulk PO</button>
+    </div>
+    <div class="scroll-area mt-16">
+      <table class="table" id="reorder-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Current Stock</th>
+            <th>Predicted Demand</th>
+            <th>Suggested Order</th>
+            <th>Supplier</th>
+            <th>Priority</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="reorder-body"></tbody>
+      </table>
+    </div>
+  </div>
+  <!-- Cross-sell Recommendations -->
+  <div class="card">
+    <div style="font-size:1.1rem; font-weight: 600;">Cross-sell Opportunities</div>
+    <div style="color:#888; margin-bottom:14px;">Products that customers often buy together</div>
+    <div class="grid grid-cols-2" id="crosssell-grid"></div>
+  </div>
+</div>
+
+<script>
+  const reorderSuggestions = [
+    { product:'Milk (1L Toned)', currentStock:45, predictedDemand:180, suggestedOrder:200, supplier:'Amul Dairy', priority:'High', savings:'₹1,200' },
+    { product:'Bread (White 400g)', currentStock:25, predictedDemand:120, suggestedOrder:150, supplier:'Modern Bread Co', priority:'High', savings:'₹800' },
+    { product:'Basmati Rice (5kg)', currentStock:12, predictedDemand:35, suggestedOrder:40, supplier:'India Gate', priority:'Medium', savings:'₹2,500' },
+    { product:'Eggs (30 pack)', currentStock:18, predictedDemand:65, suggestedOrder:80, supplier:'Fresh Farm Eggs', priority:'High', savings:'₹600' },
+    { product:'Cooking Oil (1L)', currentStock:22, predictedDemand:45, suggestedOrder:60, supplier:'Fortune Foods', priority:'Medium', savings:'₹1,100' }
+  ];
+
+  const crossSellRecommendations = [
+    { title:'Fresh Produce Bundle', description:'Customers buying groceries often add fresh fruits and vegetables', potential:'85% likelihood', revenue:'₹2,500', image:'https://images.unsplash.com/photo-1662749175803-1cba2d6be36d?auto=format&w=400&q=80' },
+    { title:'Household Cleaning Kit', description:'Essential cleaning supplies that go with grocery shopping', potential:'72% likelihood', revenue:'₹1,800', image:'https://images.unsplash.com/photo-1740325952752-fcedd5644a27?auto=format&w=400&q=80' },
+    { title:'Dairy & Breakfast Combo', description:'Milk, butter, and cereals frequently bought together', potential:'68% likelihood', revenue:'₹1,200', image:'https://images.unsplash.com/photo-1663566869071-6c926e373515?auto=format&w=400&q=80' },
+    { title:'Grocery Essentials Pack', description:'Complete basket of daily necessities for regular customers', potential:'79% likelihood', revenue:'₹3,200', image:'https://images.unsplash.com/photo-1584093092919-3d551a9c5055?auto=format&w=400&q=80' }
+  ];
+
+  // Navigation function
+  function navigateToDashboard() {
+    // For demo purposes, showing an alert
+    // In a real application, you would use:
+    // window.location.href = 'dashboard.html';
+    alert('Navigating to Dashboard...');
+    console.log('Would navigate to: dashboard.html');
+  }
+
+  // Initialize the reorder table when page loads
+  renderReorderTable();
+
+  // Inline edit state
+  let editingIndex = null;
+  let editingValue = null;
+
+  function renderReorderTable() {
+    const body = document.getElementById('reorder-body');
+    body.innerHTML = '';
+    reorderSuggestions.forEach((item, idx) => {
+      let rowHtml;
+      if (editingIndex === idx) {
+        rowHtml = `
+          <td>${item.product}</td>
+          <td>${item.currentStock}</td>
+          <td>${item.predictedDemand}</td>
+          <td>
+            <input id="edit-input" type="number" value="${editingValue ?? item.suggestedOrder}" min="1"
+            onchange="editingValue = this.value" oninput="editingValue = this.value" style="width:80px" />
+          </td>
+          <td>${item.supplier}</td>
+          <td><span class="badge ${item.priority.toLowerCase()}">${item.priority}</span></td>
+          <td>
+            <button class="btn primary" onclick="saveEdit(${idx})">Save</button>
+            <button class="btn" onclick="cancelEdit()">Cancel</button>
+          </td>
+        `;
+      } else {
+        rowHtml = `
+          <td>${item.product}</td>
+          <td>${item.currentStock}</td>
+          <td>${item.predictedDemand}</td>
+          <td style="color:#2563eb;font-weight:600">${item.suggestedOrder}</td>
+          <td>${item.supplier}</td>
+          <td><span class="badge ${item.priority.toLowerCase()}">${item.priority}</span></td>
+          <td>
+            <button class="btn" onclick="startEdit(${idx})">Edit</button>
+            <button class="btn primary" onclick="addToCart('${item.product}','${item.supplier}',${item.suggestedOrder})">Add</button>
+          </td>
+        `;
+      }
+      const tr = document.createElement('tr');
+      tr.innerHTML = rowHtml;
+      body.appendChild(tr);
+    });
+  }
+
+  window.startEdit = function(idx) {
+    editingIndex = idx;
+    editingValue = reorderSuggestions[idx].suggestedOrder;
+    renderReorderTable();
+    setTimeout(() => {
+      const inp = document.getElementById('edit-input');
+      if (inp) { inp.focus(); inp.select(); }
+    }, 10);
+  }
+
+  window.saveEdit = function(idx) {
+    let val = parseInt(editingValue,10);
+    if(!val || val<1){ alert('Invalid quantity'); return; }
+    reorderSuggestions[idx].suggestedOrder = val;
+    editingIndex = null; editingValue = null;
+    renderReorderTable();
+  }
+
+  window.cancelEdit = function() {
+    editingIndex = null;
+    editingValue = null;
+    renderReorderTable();
+  }
+
+  window.addToCart = function(product, supplier, qty) {
+    alert(${product} (${qty} units) added to cart from ${supplier}!);
+  }
+
+  // Cross-sell section rendering
+  function renderCrossSell() {
+    const grid = document.getElementById('crosssell-grid');
+    grid.innerHTML = '';
+    crossSellRecommendations.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <img class="img-bundle" src="${item.image}" loading="lazy" />
+        <div style="padding:8px;">
+          <div style="font-weight:500; font-size:1rem">${item.title}</div>
+          <div style="color:#546; font-size:0.98em">${item.description}</div>
+          <div class="flex gap-2" style="margin-top:8px;margin-bottom:2px;">
+            <span style="font-size:0.95em; color: #166534;">${item.potential}</span>
+            <span style="font-size:0.95em;">Revenue: <span style="font-weight:600">${item.revenue}</span></span>
+          </div>
+          <div class="actions">
+            <button class="btn primary" onclick="alert('Added bundle to cart!')">+ Add to Cart</button>
+            <button class="btn" onclick="alert('Open product details')">&#128279;</button>
+          </div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+  renderCrossSell();
+
+  // Stat info
+  function showStatInfo(type) {
+    const info = {
+      savings: "Potential savings calculated from bulk pricing and supplier discounts.",
+      stockout: "Items at risk of stockout based on current inventory levels and demand forecast.",
+      revenue: "Additional revenue opportunity from cross-selling complementary products."
+    };
+    alert(info[type]);
+  }
+
+  function createBulkPO() {
+    document.getElementById('bulkPOBtn').textContent = 'Adding to Cart...';
+    document.getElementById('bulkPOBtn').disabled = true;
+    setTimeout(() => {
+      document.getElementById('bulkPOBtn').textContent = 'Create Bulk PO';
+      document.getElementById('bulkPOBtn').disabled = false;
+      alert('Bulk PO items added to cart!');
+    }, 1100);
+  }
+</script>
+</body>
+</html>

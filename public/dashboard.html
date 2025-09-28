@@ -4,528 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Retail Insights</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: #f8fafc;
-            min-height: 100vh;
-            line-height: 1.6;
-        }
-
-        /* Header Styles */
-        .top-header {
-            background: white;
-            border-bottom: 1px solid #e2e8f0;
-            padding: 0 2rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-        }
-
-        .header-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 70px;
-        }
-
-        .logo-section {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #0ea5e9, #3b82f6);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 18px;
-        }
-
-        .brand-name {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #1e293b;
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-item {
-            color: #64748b;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0.5rem 0;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-item:hover,
-        .nav-item.active {
-            color: #0ea5e9;
-        }
-
-        .nav-item.active::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: #0ea5e9;
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .notification-bell {
-            position: relative;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #f1f5f9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .notification-bell:hover {
-            background: #e2e8f0;
-        }
-
-        .notification-badge {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            width: 8px;
-            height: 8px;
-            background: #ef4444;
-            border-radius: 50%;
-        }
-
-        .user-avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #f59e0b, #f97316);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        /* Main Content Container */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        /* Original Dashboard Content */
-        .original-header {
-            background: white;
-            border-radius: 20px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .welcome {
-            flex: 1;
-        }
-
-        .welcome h1 {
-            color: #1e293b;
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .welcome p {
-            color: #64748b;
-            font-size: 1.1rem;
-        }
-
-        .user-actions {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background: #0ea5e9;
-            color: white;
-        }
-
-        .btn-outline {
-            background: white;
-            color: #0ea5e9;
-            border: 2px solid #0ea5e9;
-        }
-
-        .btn-danger {
-            background: #ef4444;
-            color: white;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        /* Original Dashboard Grid */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .card {
-            background: white;
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease;
-            border: 1px solid #f1f5f9;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card h3 {
-            color: #1e293b;
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .user-info {
-            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
-            color: white;
-        }
-
-        .user-info h3 {
-            color: white;
-        }
-
-        /* Page Title for New Section */
-        .page-title {
-            margin: 2rem 0;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid #e2e8f0;
-        }
-
-        .page-title h2 {
-            font-size: 1.8rem;
-            color: #1e293b;
-            font-weight: 700;
-        }
-
-        /* Alert Notifications */
-        .alert-section {
-            margin-bottom: 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .alert-card {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-left: 4px solid;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .alert-warning {
-            border-left-color: #f59e0b;
-            background: linear-gradient(135deg, #fef3c7, #fde68a);
-        }
-
-        .alert-success {
-            border-left-color: #10b981;
-            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
-        }
-
-        .alert-content {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            flex: 1;
-        }
-
-        .alert-icon {
-            font-size: 1.5rem;
-        }
-
-        .alert-text h4 {
-            color: #1e293b;
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .alert-text p {
-            color: #64748b;
-            font-size: 0.9rem;
-        }
-
-        .alert-action {
-            padding: 8px 16px;
-            background: #0ea5e9;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .alert-action:hover {
-            background: #0284c7;
-            transform: translateY(-1px);
-        }
-
-        /* Key Metrics Section */
-        .metrics-section h3 {
-            color: #1e293b;
-            margin-bottom: 1.5rem;
-            font-size: 1.4rem;
-            font-weight: 700;
-        }
-
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .metric-card {
-            background: white;
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-            border: 1px solid #f1f5f9;
-            transition: all 0.3s ease;
-        }
-
-        .metric-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-        }
-
-        .metric-label {
-            color: #64748b;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-
-        .metric-value {
-            color: #1e293b;
-            font-size: 2.2rem;
-            font-weight: 700;
-            line-height: 1;
-        }
-
-        .metric-currency {
-            color: #10b981;
-        }
-
-        .metric-units {
-            color: #0ea5e9;
-        }
-
-        .metric-count {
-            color: #f59e0b;
-        }
-
-        .metric-ratio {
-            color: #8b5cf6;
-        }
-
-        /* Footer */
-        .footer {
-            background: white;
-            border-top: 1px solid #e2e8f0;
-            padding: 2rem;
-            text-align: center;
-            margin-top: 3rem;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .footer-link {
-            color: #64748b;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s ease;
-        }
-
-        .footer-link:hover {
-            color: #0ea5e9;
-        }
-
-        .copyright {
-            color: #94a3b8;
-            font-size: 0.8rem;
-        }
-
-        /* Loading and Alerts */
-        .alert {
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            border-left: 4px solid;
-            display: none;
-        }
-
-        .alert-info {
-            background: #e0f2fe;
-            color: #0c4a6e;
-            border-color: #0ea5e9;
-        }
-
-        .alert-error {
-            background: #fef2f2;
-            color: #991b1b;
-            border-color: #ef4444;
-        }
-
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .loading::after {
-            content: '';
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            border: 4px solid #0ea5e9;
-            border-radius: 50%;
-            border-top-color: transparent;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-            
-            .header-content {
-                padding: 0 1rem;
-                height: 60px;
-            }
-            
-            .nav-menu {
-                display: none;
-            }
-            
-            .original-header {
-                padding: 1.5rem;
-                text-align: center;
-            }
-            
-            .welcome h1 {
-                font-size: 1.5rem;
-            }
-            
-            .user-actions {
-                justify-content: center;
-                width: 100%;
-            }
-            
-            .metrics-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .alert-card {
-                flex-direction: column;
-                text-align: center;
-                gap: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .top-header {
-                padding: 0 1rem;
-            }
-            
-            .metrics-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .user-actions {
-                flex-direction: column;
-                width: 100%;
-            }
-            
-            .footer-links {
-                flex-direction: column;
-                gap: 1rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="shared-styles.css">
 </head>
 <body>
     <!-- Top Navigation Header -->
@@ -537,10 +16,12 @@
             </div>
             
             <nav class="nav-menu">
-                <a href="#" class="nav-item active">Dashboard</a>
-                <a href="#" class="nav-item">Inventory</a>
-                <a href="#" class="nav-item">Demand Forecast</a>
-                <a href="#" class="nav-item">Recommendations</a>
+                <a href="dashboard.html" class="nav-item active">Dashboard</a>
+                <a href="inventoryhealth.html" class="nav-item">Inventory</a>
+                <a href="forecasttrends.html" class="nav-item">Demand Forecast</a>
+                <a href="recommendation.html" class="nav-item">Recommendations</a>
+                <a href="purchaseorders.html" class="nav-item">Purchase Orders</a>
+                <a href="cart.html" class="nav-item">Shopping Cart</a>
             </nav>
             
             <div class="header-actions">
@@ -548,8 +29,10 @@
                     🔔
                     <div class="notification-badge"></div>
                 </div>
-                <div class="user-avatar" id="userAvatar">A</div>
+                <a href="profile.html"><div class="user-avatar" id ="userAvatar">A</div></a>
+                <a href="settings.html"><div class="settings-icon">S</div></a>
             </div>
+
         </div>
     </div>
 
@@ -655,7 +138,7 @@
                         <p>Take action now to prevent lost sales.</p>
                     </div>
                 </div>
-                <button class="alert-action" onclick="viewStockoutDetails()">View Details</button>
+                <button class="alert-action" onclick="window.location.href='inventory.html'">View Details</button>
             </div>
             
             <div class="alert-card alert-success">
@@ -666,7 +149,7 @@
                         <p>Your efficient reordering strategy is paying off.</p>
                     </div>
                 </div>
-                <button class="alert-action" onclick="viewSavings()">View Savings</button>
+                <button class="alert-action" onclick="window.location.href='recommendations.html'">View Savings</button>
             </div>
         </div>
 
@@ -715,8 +198,9 @@
             const token = localStorage.getItem('authToken');
             
             if (!token) {
-                window.location.href = '/login';
-                return;
+                // Comment out for testing
+                // window.location.href = '/login';
+                // return;
             }
 
             loadUserData();
@@ -751,32 +235,21 @@
             loading.style.display = 'block';
 
             try {
-                const token = localStorage.getItem('authToken');
-                const response = await fetch('/api/auth/user', {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json'
-                    }
-                });
-
-                if (response.ok) {
-                    const data = await response.json();
-                    currentUser = data.user;
-                    updateUserInterface();
-                    showAlert('Dashboard loaded successfully!', 'info');
-                } else {
-                    throw new Error('Failed to load user data');
-                }
+                // For testing without backend
+                const mockUser = {
+                    name: 'John Doe',
+                    email: 'john@example.com',
+                    _id: 'user123',
+                    createdAt: new Date().toISOString()
+                };
+                
+                currentUser = mockUser;
+                updateUserInterface();
+                showAlert('Dashboard loaded successfully!', 'info');
+                
             } catch (error) {
                 console.error('Error loading user data:', error);
-                showAlert('Failed to load user data. Please login again.', 'error');
-                
-                setTimeout(() => {
-                    localStorage.removeItem('authToken');
-                    localStorage.removeItem('user');
-                    window.location.href = '/login';
-                }, 2000);
+                showAlert('Failed to load user data. Using demo data.', 'error');
             } finally {
                 loading.style.display = 'none';
             }
@@ -785,8 +258,7 @@
         function updateUserInterface() {
             if (!currentUser) return;
 
-            const storedUser = JSON.parse(localStorage.getItem('user') || '{}');
-            const userRole = storedUser.role || 'retailer';
+            const userRole = 'retailer';
 
             // Update welcome message
             document.getElementById('welcomeMessage').textContent = `Welcome back, ${currentUser.name}!`;
@@ -808,17 +280,6 @@
             document.getElementById('lastLoginDays').textContent = '0';
         }
 
-        // New retail dashboard functions
-        function viewStockoutDetails() {
-            showAlert('Opening stockout details...', 'info');
-            // In real app, this would navigate to inventory page
-        }
-
-        function viewSavings() {
-            showAlert('Opening savings analysis...', 'info');
-            // In real app, this would show detailed savings report
-        }
-
         async function refreshData() {
             hideAlert();
             await loadUserData();
@@ -826,24 +287,7 @@
         }
 
         async function testApiConnection() {
-            try {
-                const token = localStorage.getItem('authToken');
-                const response = await fetch('/api/auth/user', {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json'
-                    }
-                });
-
-                if (response.ok) {
-                    showAlert('✅ API connection successful!', 'info');
-                } else {
-                    throw new Error(`API returned status: ${response.status}`);
-                }
-            } catch (error) {
-                showAlert('❌ API connection failed: ' + error.message, 'error');
-            }
+            showAlert('API connection test - Demo mode', 'info');
         }
 
         function downloadUserData() {
@@ -854,7 +298,7 @@
 
             const userData = {
                 user: currentUser,
-                role: JSON.parse(localStorage.getItem('user') || '{}').role,
+                role: 'retailer',
                 exported: new Date().toISOString(),
                 stats: {
                     memberSince: currentUser.createdAt,
@@ -873,43 +317,19 @@
             link.click();
             document.body.removeChild(link);
             
-            showAlert('📥 User data downloaded successfully!', 'info');
+            showAlert('User data downloaded successfully!', 'info');
         }
 
         function clearLocalData() {
-            if (confirm('Are you sure you want to clear all local data? This will log you out.')) {
-                localStorage.removeItem('authToken');
-                localStorage.removeItem('user');
-                showAlert('🗑️ Local data cleared. Redirecting to login...', 'info');
-                
-                setTimeout(() => {
-                    window.location.href = '/login';
-                }, 2000);
+            if (confirm('Are you sure you want to clear all local data?')) {
+                localStorage.clear();
+                showAlert('Local data cleared!', 'info');
             }
         }
 
         function showTokenInfo() {
-            const token = localStorage.getItem('authToken');
-            if (!token) {
-                showAlert('No token found', 'error');
-                return;
-            }
-
-            try {
-                const payload = JSON.parse(atob(token.split('.')[1]));
-                const expDate = new Date(payload.exp * 1000);
-                const isExpired = expDate < new Date();
-
-                const tokenInfo = `Token Info:
-• User ID: ${payload.userId}
-• Expires: ${expDate.toLocaleString()}
-• Status: ${isExpired ? '❌ Expired' : '✅ Valid'}
-• Length: ${token.length} characters`;
-
-                alert(tokenInfo);
-            } catch (error) {
-                showAlert('❌ Invalid token format', 'error');
-            }
+            const token = localStorage.getItem('authToken') || 'demo-token-123';
+            alert(`Token Info: ${token.substring(0, 20)}...`);
         }
 
         async function logout() {
@@ -917,50 +337,13 @@
                 return;
             }
 
-            try {
-                const token = localStorage.getItem('authToken');
-                
-                await fetch('/api/auth/logout', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json'
-                    }
-                });
-
-                localStorage.removeItem('authToken');
-                localStorage.removeItem('user');
-                
-                showAlert('👋 Logged out successfully! Redirecting...', 'info');
-                
-                setTimeout(() => {
-                    window.location.href = '/';
-                }, 1500);
-                
-            } catch (error) {
-                console.error('Logout error:', error);
-                localStorage.removeItem('authToken');
-                localStorage.removeItem('user');
+            localStorage.clear();
+            showAlert('Logged out successfully!', 'info');
+            
+            setTimeout(() => {
                 window.location.href = '/';
-            }
+            }, 1500);
         }
-
-        // Auto-refresh user data every 5 minutes
-        setInterval(() => {
-            if (document.visibilityState === 'visible') {
-                loadUserData();
-            }
-        }, 5 * 60 * 1000);
-
-        // Handle page visibility change
-        document.addEventListener('visibilitychange', () => {
-            if (document.visibilityState === 'visible') {
-                const token = localStorage.getItem('authToken');
-                if (!token) {
-                    window.location.href = '/login';
-                }
-            }
-        });
     </script>
 </body>
 </html>

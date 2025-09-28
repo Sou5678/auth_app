@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="shared-styles.css">
+  <title>Settings - Inventory Management</title>
+  <!-- <style>
+    body { font-family: Arial, sans-serif; background: #fafbfc; margin: 0; }
+    
+    .nav-button {
+      display: inline-flex;
+      align-items: center;
+      background: #2563eb;
+      color: white;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 16px;
+      transition: all 0.2s ease;
+      margin-bottom: 16px;
+      cursor: pointer;
+      border: none;
+    }
+
+    .nav-button:hover {
+      background: #1d4ed8;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    }
+
+    .nav-button:active {
+      transform: translateY(0);
+    }
+
+    .up-arrow {
+      border: solid white;
+      border-width: 0 3px 3px 0;
+      display: inline-block;
+      padding: 6px;
+      margin-right: 12px;
+      transform: rotate(135deg);
+      -webkit-transform: rotate(135deg);
+      transition: transform 0.2s ease;
+    }
+
+    .nav-button:hover .up-arrow {
+      transform: rotate(135deg) scale(1.1);
+    }
+    
+    .container { max-width: 900px; margin: auto; padding: 24px; }
+    .flex { display: flex; align-items: center; }
+    .gap-3 { gap: 12px; }
+    .gap-2 { gap: 8px; }
+    .space-y-2 > * + * { margin-top: 8px; }
+    .space-y-4 > * + * { margin-top: 16px; }
+    .btn {
+      padding: 7px 12px;
+      border: 1px solid #e3e3e3;
+      background: #f1f1f1;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s;
+      font-size: 15px;
+    }
+    .btn.primary { background: #2563eb; color: #fff; border-color: #1557c4; }
+    .btn.danger { background: #dc2626; color: #fff; border-color: #b91c1c; }
+    .btn[disabled] { opacity: 0.6; cursor: not-allowed; }
+    .card { background: #fff; border-radius: 8px; margin-bottom: 24px; box-shadow: 0 1px 4px #0001; padding: 20px; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 14px; font-weight: 500; }
+    .badge.enabled { background: #d1fae5; color: #065f46; }
+    .badge.disabled { background: #fee2e2; color: #b91c1c; }
+    .form-group { margin-bottom: 16px; }
+    .form-label { display: block; margin-bottom: 6px; font-weight: 500; color: #374151; }
+    .form-input { 
+      width: 100%; 
+      padding: 8px 12px; 
+      border: 1px solid #d1d5db; 
+      border-radius: 6px; 
+      font-size: 14px;
+      transition: border-color 0.15s;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+    .form-select {
+      width: 100%; 
+      padding: 8px 12px; 
+      border: 1px solid #d1d5db; 
+      border-radius: 6px; 
+      font-size: 14px;
+      background: white;
+    }
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+    
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 34px;
+    }
+    
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    
+    input:checked + .slider {
+      background-color: #2563eb;
+    }
+    
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+    
+    .setting-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    
+    .setting-item:last-child {
+      border-bottom: none;
+    }
+    
+    .setting-info {
+      flex: 1;
+    }
+    
+    .setting-title {
+      font-weight: 500;
+      color: #374151;
+      margin-bottom: 4px;
+    }
+    
+    .setting-description {
+      color: #6b7280;
+      font-size: 14px;
+    }
+    
+    .grid { display: grid; gap: 18px; }
+    .grid-cols-2 { grid-template-columns: 1fr 1fr; }
+    .mt-16 { margin-top: 16px }
+    
+    @media (max-width:700px) {
+      .container { padding: 6px; }
+      .grid-cols-2 { grid-template-columns: 1fr; }
+    }
+  </style> -->
+</head>
+<body>
+<div class="container">
+  <!-- Navigation Button -->
+ <a href="dashboard.html" class="nav-button">
+    <span class="up-arrow"></span>
+    Back to Dashboard
+  </a>
+
+  <!-- Header -->
+  <div class="space-y-2">
+    <div class="flex gap-3">
+      <h1 style="font-size:1.85rem; font-weight:600;">Settings</h1>
+    </div>
+    <p style="color:#666; margin-left:0;">Configure your application preferences and system settings</p>
+  </div>
+
+  <div class="grid grid-cols-2">
+    <!-- General Settings -->
+    <div class="card">
+      <div style="font-size:1.1rem; font-weight: 600; margin-bottom: 16px;">General Settings</div>
+      
+      <form id="generalForm">
+        <div class="form-group">
+          <label class="form-label">Language</label>
+          <select class="form-select" id="language">
+            <option value="en">English</option>
+            <option value="hi">Hindi</option>
+            <option value="bn">Bengali</option>
+            <option value="te">Telugu</option>
+            <option value="mr">Marathi</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Currency</label>
+          <select class="form-select" id="currency">
+            <option value="INR">Indian Rupee (₹)</option>
+            <option value="USD">US Dollar ($)</option>
+            <option value="EUR">Euro (€)</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Date Format</label>
+          <select class="form-select" id="dateFormat">
+            <option value="DD/MM/YYYY">DD/MM/YYYY</option>
+            <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+            <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Time Zone</label>
+          <select class="form-select" id="timezone">
+            <option value="Asia/Kolkata">India Standard Time (IST)</option>
+            <option value="Asia/Dubai">Gulf Standard Time (GST)</option>
+            <option value="UTC">Coordinated Universal Time (UTC)</option>
+          </select>
+        </div>
+        
+        <button type="submit" class="btn primary">Save General Settings</button>
+      </form>
+    </div>
+
+    <!-- Notification Settings -->
+    <div class="card">
+      <div style="font-size:1.1rem; font-weight: 600; margin-bottom: 16px;">Notification Settings</div>
+      
+      <div class="setting-item">
+        <div class="setting-info">
+          <div class="setting-title">Email Notifications</div>
+          <div class="setting-description">Receive updates via email</div>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="emailNotifications" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+      
+      <div class="setting-item">
+        <div class="setting-info">
+          <div class="setting-title">SMS Alerts</div>
+          <div class="setting-description">Get critical alerts via SMS</div>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="smsAlerts" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+      
+      <div class="setting-item">
+        <div class="setting-info">
+          <div class="setting-title">Low Stock Alerts</div>
+          <div class="setting-description">Alert when inventory is low</div>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="lowStockAlerts" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+      
+      <div class="setting-item">
+        <div class="setting-info">
+          <div class="setting-title">Daily Reports</div>
+          <div class="setting-description">Receive daily summary reports</div>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="dailyReports" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+      
+      <div class="setting-item">
+        <div class="setting-info">
+          <div class="setting-title">Marketing Updates</div>
+          <div class="setting-description">Promotional offers and news</div>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="marketingUpdates">
+          <span class="slider"></span>
+        </label>
+      </div>
+      
+      <button class="btn primary mt-16" onclick="saveNotificationSettings()">Save Notification Settings</button>
+    </div>
+  </div>
+
+  <!-- Inventory Settings -->
+  <div class="card">
+    <div style="font-size:1.1rem; font-weight: 600; margin-bottom: 16px;">Inventory Settings</div>
+    
+    <div class="grid grid-cols-2">
+      <div>
+        <div class="form-group">
+          <label class="form-label">Low Stock Threshold (%)</label>
+          <input type="number" class="form-input" value="20" id="lowStockThreshold" min="1" max="50">
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Auto-reorder Level (%)</label>
+          <input type="number" class="form-input" value="10" id="autoReorderLevel" min="1" max="30">
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Default Supplier Lead Time (days)</label>
+          <input type="number" class="form-input" value="7" id="leadTime" min="1" max="30">
+        </div>
+      </div>
+      
+      <div>
+        <div class="setting-item">
+          <div class="setting-info">
+            <div class="setting-title">Auto-reorder</div>
+            <div class="setting-description">Automatically create purchase orders</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="autoReorder">
+            <span class="slider"></span>
+          </label>
+        </div>
+        
+        <div class="setting-item">
+          <div class="setting-info">
+            <div class="setting-title">Demand Forecasting</div>
+            <div class="setting-description">Use AI for demand prediction</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="demandForecasting" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+        
+        <div class="setting-item">
+          <div class="setting-info">
+            <div class="setting-title">Price Optimization</div>
+            <div class="setting-description">Suggest optimal pricing</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="priceOptimization" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+    
+    <button class="btn primary mt-16" onclick="saveInventorySettings()">Save Inventory Settings</button>
+  </div>
+
+  <!-- Security Settings -->
+  <div class="card">
+    <div style="font-size:1.1rem; font-weight: 600; margin-bottom: 16px;">Security Settings</div>
+    
+    <div class="grid grid-cols-2">
+      <div>
+        <div class="setting-item">
+          <div class="setting-info">
+            <div class="setting-title">Two-Factor Authentication</div>
+            <div class="setting-description">Add extra security to your account</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="twoFactor">
+            <span class="slider"></span>
+          </label>
+        </div>
+        
+        <div class="setting-item">
+          <div class="setting-info">
+            <div class="setting-title">Login Alerts</div>
+            <div class="setting-description">

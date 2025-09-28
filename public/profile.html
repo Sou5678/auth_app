@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="shared-styles.css">
+  <title>Profile - Inventory Management</title>
+  <!-- <style>
+    body { font-family: Arial, sans-serif; background: #fafbfc; margin: 0; }
+    
+    .nav-button {
+      display: inline-flex;
+      align-items: center;
+      background: #2563eb;
+      color: white;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 16px;
+      transition: all 0.2s ease;
+      margin-bottom: 16px;
+      cursor: pointer;
+      border: none;
+    }
+
+    .nav-button:hover {
+      background: #1d4ed8;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    }
+
+    .nav-button:active {
+      transform: translateY(0);
+    }
+
+    .up-arrow {
+      border: solid white;
+      border-width: 0 3px 3px 0;
+      display: inline-block;
+      padding: 6px;
+      margin-right: 12px;
+      transform: rotate(135deg);
+      -webkit-transform: rotate(135deg);
+      transition: transform 0.2s ease;
+    }
+
+    .nav-button:hover .up-arrow {
+      transform: rotate(135deg) scale(1.1);
+    }
+    
+    .container { max-width: 900px; margin: auto; padding: 24px; }
+    .flex { display: flex; align-items: center; }
+    .gap-3 { gap: 12px; }
+    .gap-2 { gap: 8px; }
+    .space-y-2 > * + * { margin-top: 8px; }
+    .space-y-4 > * + * { margin-top: 16px; }
+    .btn {
+      padding: 7px 12px;
+      border: 1px solid #e3e3e3;
+      background: #f1f1f1;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s;
+      font-size: 15px;
+    }
+    .btn.primary { background: #2563eb; color: #fff; border-color: #1557c4; }
+    .btn.danger { background: #dc2626; color: #fff; border-color: #b91c1c; }
+    .btn[disabled] { opacity: 0.6; cursor: not-allowed; }
+    .card { background: #fff; border-radius: 8px; margin-bottom: 24px; box-shadow: 0 1px 4px #0001; padding: 20px; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 14px; font-weight: 500; }
+    .badge.active { background: #d1fae5; color: #065f46; }
+    .badge.inactive { background: #fee2e2; color: #b91c1c; }
+    .table { width: 100%; border-collapse: collapse; }
+    .table th, .table td { padding: 8px 12px; border: 1px solid #ececec; }
+    .form-group { margin-bottom: 16px; }
+    .form-label { display: block; margin-bottom: 6px; font-weight: 500; color: #374151; }
+    .form-input { 
+      width: 100%; 
+      padding: 8px 12px; 
+      border: 1px solid #d1d5db; 
+      border-radius: 6px; 
+      font-size: 14px;
+      transition: border-color 0.15s;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+    .grid { display: grid; gap: 18px; }
+    .grid-cols-2 { grid-template-columns: 1fr 1fr; }
+    .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .mt-16 { margin-top: 16px }
+    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 18px; }
+    .statcontent { font-size: 24px; margin-top: 7px; margin-bottom: 4px; font-weight: bold;}
+    .profile-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 16px;
+    }
+    .activity-item {
+      padding: 12px;
+      border-left: 3px solid #2563eb;
+      background: #f8fafc;
+      margin-bottom: 8px;
+      border-radius: 0 6px 6px 0;
+    }
+    .activity-time {
+      color: #6b7280;
+      font-size: 12px;
+    }
+    @media (max-width:700px) {
+      .container { padding: 6px; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .grid-cols-2 { grid-template-columns: 1fr; }
+      .grid-cols-3 { grid-template-columns: 1fr; }
+    }
+  </style> -->
+</head>
+<body>
+<div class="container">
+  <!-- Navigation Button -->
+  <a href="dashboard.html" class="nav-button">
+    <span class="up-arrow"></span>
+    Back to Dashboard
+  </a>
+
+  <!-- Header -->
+  <div class="space-y-2">
+    <div class="flex gap-3">
+      <h1 style="font-size:1.85rem; font-weight:600;">Profile</h1>
+    </div>
+    <p style="color:#666; margin-left:0;">Manage your account information and preferences</p>
+  </div>
+
+  <!-- Profile Stats -->
+  <div class="stats-grid">
+    <div class="card">
+      <div style="color:#256d2a;">Account Status</div>
+      <div class="statcontent" style="color:#16a34a;">Active</div>
+      <div style="color:#888;font-size:13px">Since Jan 2024</div>
+    </div>
+    <div class="card">
+      <div style="color:#bd5407;">Total Orders</div>
+      <div class="statcontent" style="color:#ea580c;">1,247</div>
+      <div style="color:#888;font-size:13px">This month: 89</div>
+    </div>
+    <div class="card">
+      <div style="color:#2235b6;">Saved Amount</div>
+      <div class="statcontent" style="color:#2563eb;">₹2,45,000</div>
+      <div style="color:#888;font-size:13px">Through smart ordering</div>
+    </div>
+  </div>
+
+  <!-- Profile Information -->
+  <div class="grid grid-cols-2">
+    <div class="card">
+      <div style="font-size:1.1rem; font-weight: 600; margin-bottom: 16px;">Profile Information</div>
+      
+      <div class="flex gap-3" style="margin-bottom: 20px;">
+        <div class="profile-avatar" id="avatar">RS</div>
+        <div style="flex: 1;">
+          <h3 style="margin: 0; color: #374151;">Raj Sharma</h3>
+          <p style="margin: 4px 0; color: #6b7280;">Store Owner</p>
+          <span class="badge active">Verified Account</span>
+        </div>
+      </div>
+
+      <form id="profileForm" class="space-y-4">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" class="form-input" value="Raj Sharma" id="fullName">
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" value="raj.sharma@example.com" id="email">
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Phone Number</label>
+          <input type="tel" class="form-input" value="+91 98765 43210" id="phone">
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Store Name</label>
+          <input type="text" class="form-input" value="Sharma General Store" id="storeName">
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Store Address</label>
+          <input type="text" class="form-input" value="123 Main Street, New Delhi - 110001" id="address">
+        </div>
+        
+        <button type="submit" class="btn primary">Update Profile</button>
+        <button type="button" class="btn" onclick="resetForm()">Reset</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <div style="font-size:1.1rem; font-weight: 600; margin-bottom: 16px;">Recent Activity</div>
+      
+      <div id="activityLog">
+        <div class="activity-item">
+          <div style="font-weight: 500;">Order #ORD-2024-1247 completed</div>
+          <div style="color: #6b7280; font-size: 14px;">Milk, Bread, Rice - Total: ₹1,245</div>
+          <div class="activity-time">2 hours ago</div>
+        </div>
+        
+        <div class="activity-item">
+          <div style="font-weight: 500;">Inventory alert resolved</div>
+          <div style="color: #6b7280; font-size: 14px;">Restocked Cooking Oil - 50 units</div>
+          <div class="activity-time">5 hours ago</div>
+        </div>
+        
+        <div class="activity-item">
+          <div style="font-weight: 500;">Profile updated</div>
+          <div style="color: #6b7280; font-size: 14px;">Phone number changed</div>
+          <div class="activity-time">1 day ago</div>
+        </div>
+        
+        <div class="activity-item">
+          <div style="font-weight: 500;">New supplier added</div>
+          <div style="color: #6b7280; font-size: 14px;">Fresh Farm Eggs - Contact verified</div>
+          <div class="activity-time">2 days ago</div>
+        </div>
+        
+        <div class="activity-item">
+          <div style="font-weight: 500;">Bulk order saved ₹3,200</div>
+          <div style="color: #6b7280; font-size: 14px;">Smart recommendations applied</div>
+          <div class="activity-time">3 days ago</div>
+        </div>
+      </div>
+      
+      <button class="btn" onclick="loadMoreActivity()" style="width: 100%; margin-top: 16px;">Load More Activity</button>
+    </div>
+  </div>
+
+  <!-- Account Actions -->
+  <div class="card">
+    <div style="font-size:1.1rem; font-weight: 600; margin-bottom: 16px;">Account Actions</div>
+    <div class="flex gap-2">
+      <button class="btn primary" onclick="changePassword()">Change Password</button>
+      <button class="btn" onclick="downloadData()">Download My Data</button>
+      <button class="btn danger" onclick="deactivateAccount()">Deactivate Account</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function navigateToDashboard() {
+    alert('Navigating to Dashboard...');
+    console.log('Would navigate to: dashboard.html');
+  }
+
+  document.getElementById('profileForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = {
+      fullName: document.getElementById('fullName').value,
+      email: document.getElementById('email').value,
+      phone: document.getElementById('phone').value,
+      storeName: document.getElementById('storeName').value,
+      address: document.getElementById('address').value
+    };
+    
+    // Update avatar initials
+    const nameParts = formData.fullName.split(' ');
+    const initials = nameParts.map(part => part.charAt(0)).join('').toUpperCase().substring(0, 2);
+    document.getElementById('avatar').textContent = initials;
+    
+    alert('Profile updated successfully!');
+    console.log('Profile data:', formData);
+  });
+
+  function resetForm() {
+    document.getElementById('profileForm').reset();
+    document.getElementById('fullName').value = "Raj Sharma";
+    document.getElementById('email').value = "raj.sharma@example.com";
+    document.getElementById('phone').value = "+91 98765 43210";
+    document.getElementById('storeName').value = "Sharma General Store";
+    document.getElementById('address').value = "123 Main Street, New Delhi - 110001";
+    document.getElementById('avatar').textContent = "RS";
+  }
+
+  function loadMoreActivity() {
+    const activityLog = document.getElementById('activityLog');
+    const newActivities = [
+      {
+        title: "Weekly report generated",
+        description: "Sales analysis for last 7 days",
+        time: "4 days ago"
+      },
+      {
+        title: "Payment received",
+        description: "₹15,670 from customer payments",
+        time: "5 days ago"
+      },
+      {
+        title: "System maintenance",
+        description: "Inventory sync completed",
+        time: "1 week ago"
+      }
+    ];
+    
+    newActivities.forEach(activity => {
+      const activityItem = document.createElement('div');
+      activityItem.className = 'activity-item';
+      activityItem.innerHTML = `
+        <div style="font-weight: 500;">${activity.title}</div>
+        <div style="color: #6b7280; font-size: 14px;">${activity.description}</div>
+        <div class="activity-time">${activity.time}</div>
+      `;
+      activityLog.appendChild(activityItem);
+    });
+    
+    alert('More activities loaded!');
+  }
+
+  function changePassword() {
+    const newPassword = prompt('Enter new password:');
+    if (newPassword && newPassword.length >= 6) {
+      alert('Password changed successfully!');
+    } else if (newPassword) {
+      alert('Password must be at least 6 characters long.');
+    }
+  }
+
+  function downloadData() {
+    alert('Your data export has been initiated. You will receive an email with download link within 24 hours.');
+  }
+
+  function deactivateAccount() {
+    const confirm = window.confirm('Are you sure you want to deactivate your account? This action cannot be undone.');
+    if (confirm) {
+      const reason = prompt('Please tell us why you are leaving (optional):');
+      alert('Account deactivation request submitted. We\'re sorry to see you go!');
+      console.log('Deactivation reason:', reason);
+    }
+  }
+</script>
+</body>
+</html>
